@@ -1,0 +1,70 @@
+====== stylingpages plugin for DokuWiki ======
+
+Allows users to change the css/js files of this plugin with wikitext.
+
+The intended use of this plugin is to manage the css/less/js
+files that the wiki reads from the plugin folder.
+
+By default the configuration is empty.
+
+**WARNING**
+this plugin can be abused to change other files, use it with care
+
+
+===== Example configurations =====
+
+1) <code>wiki:styling=/^(all|screen|print|speech)\.(css|less)$/</code>
+
+When the wiki:styling page is saved it will create, replace, or delete these files:
+
+  * all.css and all.less - for all media types
+  * screen.css and screen.less - for screen media type (style.css and style.less are alternatives)
+  * print.css and print.less - for print media type
+  * speech.css and speech.less - for speech media type
+
+2) <code>wiki:styling=/^script\.js$/</code>
+
+When the wiki:styling page is saved it will create, replace, or delete this file:
+
+  * script.js
+
+3) <code>wiki:styling=/^(all|screen|print|speech)\.(css|less)$/, wiki:styling=/^script\.js$/</code>
+
+You can have multiple entries with the same page.
+
+4) <code>wiki:css=/^(all|screen|print|speech)\.(css|less)$/, wiki:javascript=/^script\.js$/</code>
+
+You can have different pages.
+In this screnario, I recommend restricting write access to wiki:javascript with ACL.
+
+**WARNING**
+Different pages aiming for the same file won't combine their code.
+The file will be according to the last page that was saved.
+
+
+===== Example wikitext =====
+
+<code css all.css>
+/* placed in <stylingpages_plugin_dir>/all.css */
+#dokuwiki__site::before {
+  content: 'Hello from stylingpages';
+  color: black;
+  background: white;
+  border: 1px solid red;
+}
+</code>
+
+<code css all.css>
+/* combined with the code above (same file) */
+#dokuwiki__site::after {
+  content: 'Hello from stylingpages';
+  color: black;
+  background: white;
+  border: 1px solid red;
+}
+</code>
+
+<code javascript script.js>
+/* placed in <stylingpages_plugin_dir>/script.js */
+alert('Hello from stylingpages');
+</code>

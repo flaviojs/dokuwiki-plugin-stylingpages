@@ -1,0 +1,6 @@
+base   stylingpages
+author Flávio J. Saraiva
+email  flaviojs2005@gmail.com
+date   2018-10-06
+name   stylingpages plugin
+desc   Allows users to change the css/js files of this plugin with wikitext.
